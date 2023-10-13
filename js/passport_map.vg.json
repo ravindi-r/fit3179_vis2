@@ -27,6 +27,7 @@
             "type": "quantitative",
             "legend": {"title": "Passport Rank"},
             "scale": {
+              "type": "threshold",
               "domain": [50,100,150]
             }
         }
