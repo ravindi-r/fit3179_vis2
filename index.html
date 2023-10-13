@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Passport Index</title>
+    <meta charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+
+    <style media="screen">
+      /* Add space between Vega-Embed links  */
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Template for Embedding Vega-Lite Visualization</h1>
+    <!-- Container for the visualization -->
+    
+    <div id="vis_passport_map"></div>
+    <br>
+    <div id="vis_hist"></div><br>
+    <div id="vis_bump"></div>
+
+    <script>
+      // Assign the specification to a local variable vlSpec.
+      var map = "passport_map.vg.json";
+      var hist = "histogram.vg.json";
+      var bump = "bump_chart.vg.json";
+      
+
+      // Embed the visualization in the container with id `vis`
+      vegaEmbed('#vis_hist', hist);
+      vegaEmbed('#vis_bump', bump);
+      vegaEmbed('#vis_passport_map', map);
+    </script>
+  </body>
+</html>
+
