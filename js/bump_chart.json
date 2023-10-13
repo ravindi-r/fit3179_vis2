@@ -1,0 +1,44 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Bump chart",
+    "data": {
+        "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/henleypassportindex.csv"
+    },
+    "params": [
+        {
+            "name": "year_selection",
+            "bind": {
+                "input": "select",
+                "options": [
+                    null,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022
+                ],
+                "labels": [
+                    "Show all","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"
+                ],
+                "name": "Year Selection:  "
+            }
+        }
+    ],
+    "transform": [
+        {
+            "filter": {
+                "field": "RANK",
+                "range": [1, 10]
+            }
+        },
+        {
+            "filter": "year_selection == null || datum.YEAR == year_selection"
+        }
+    ],
+    "layer": [
+        {
+            "mark": {"type": "point", "point": true},
+            "encoding": {
+                "x": {"field": "RANK", "type": "quantitative"},
+                "y": {"field": "COUNTRY", "type": "nominal"},
+                "order": {"field": "RANK", "type": "quantitative"},
+                "color": {"field":"YEAR", "type": "nominal"}
+            }
+        }
+    ]
+  }
