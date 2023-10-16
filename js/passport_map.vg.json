@@ -38,7 +38,10 @@
           }
       },
       {
-          "mark": {"type": "geoshape"},
+          "mark": {
+            "type": "geoshape",
+            "stroke": "gray"
+          },
           "encoding": {
               "color": {
                   "field": "ACCESS_TO_COUNTRIES",
@@ -47,6 +50,9 @@
                       "type": "threshold",
                       "domain": [50,100,150],
                       "range": ["#ffffcc","#c2e699","#78c679","#238443"]
+                  },
+                  "legend": {
+                      "title": "Number of Accessible Countries"
                   }
               },
               "tooltip":[
