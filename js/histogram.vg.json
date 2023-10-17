@@ -1,38 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Distribution of Accessibility (as of 2022)",
-  "width": 400,
-  "height": 200,
+  "width": 200,
+  "height": 100,
   "data": {
     "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/henleypassportindex.csv"
   },
-  "params": [
-    {
-      "name": "continent_selection",
-      "bind": {
-        "input": "select",
-        "options": [
-          null,
-          "North America",
-          "South America",
-          "Europe",
-          "Africa",
-          "Asia",
-          "Oceania"
-        ],
-        "labels": [
-          "Others",
-          "North America",
-          "South America",
-          "Europe",
-          "Africa",
-          "Asia",
-          "Oceania"
-        ],
-        "name": "Continent Selection: "
-      }
-    }
-  ],
   "transform": [
         {
             "lookup": "COUNTRY",
@@ -47,9 +20,6 @@
         },
         {
           "filter": "datum.YEAR == 2022"
-        },
-        {
-          "filter": "continent_selection == null || datum.CONTINENT == continent_selection"
         }
     ],
   "mark": {
