@@ -1,12 +1,76 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "data": {"url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/henleypassportindex_2022.csv"},
-    "mark": {"type":"bar","color":"lightcoral"},
-    "encoding": {
-      "x": {
-        "bin": true,
-        "field": "ACCESS_TO_COUNTRIES"
-      },
-      "y": {"aggregate": "count"}
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Distribution of Accessibility (as of 2022)",
+  "width": 400,
+  "height": 200,
+  "data": {
+    "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/henleypassportindex.csv"
+  },
+  "params": [
+    {
+      "name": "continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "labels": [
+          "Others",
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "name": "Continent Selection: "
+      }
     }
+  ],
+  "transform": [
+        {
+            "lookup": "COUNTRY",
+            "from": {
+                "data": {
+                    "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/ne_110m.json",
+                    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+                },
+                "key": "properties.NAME_LONG",
+                "fields": ["properties","type","geometry"]
+            }
+        },
+        {
+          "filter": "datum.YEAR == 2022"
+        },
+        {
+          "filter": "continent_selection == null || datum.CONTINENT == continent_selection"
+        }
+    ],
+  "mark": {
+    "type": "bar",
+    "color": "#c2e699",
+    "stroke": "#238443"
+  },
+  "encoding": {
+    "x": {
+      "bin": true,
+      "field": "ACCESS_TO_COUNTRIES",
+      "type": "quantitative",
+      "title": "No. of Accessible Countries"
+    },
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative"
+    },
+    "row": {
+      "field": "properties.CONTINENT",
+      "type": "nominal"
+    }
+  }
 }
