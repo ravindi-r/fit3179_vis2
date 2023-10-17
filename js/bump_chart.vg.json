@@ -1,43 +1,96 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "description": "Bump chart",
+    "width": 600,
+    "height": 400,
     "data": {
         "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/henleypassportindex.csv"
     },
-    "params": [
+    "transform": [
+        
         {
-            "name": "year_selection",
-            "bind": {
-                "input": "select",
-                "options": [
-                    null,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022
-                ],
-                "labels": [
-                    "Show all","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022"
-                ],
-                "name": "Year Selection:  "
-            }
+            "filter": "datum.RANK <= 5"
         }
     ],
-    "transform": [
+    "encoding": {
+        "x": {
+            "field": "YEAR",
+            "type": "ordinal",
+            "sort": "ascending",
+            "title": "Year"
+        },
+        "y": {
+            "field": "RANK",
+            "type": "quantitative",
+            "sort": "descending",
+            "title": "Passport Ranking",
+            "axis":{
+                "tickCount": 5
+            }
+        }
+    },
+    "layer": [
         {
-            "filter": {
-                "field": "RANK",
-                "range": [1, 10]
+            "params": [
+                {
+                    "name": "country_select",
+                    "select": 
+                        {
+                            "type":"point",
+                            "on":"click",
+                            "fields": ["COUNTRY"]
+                        },
+                        "bind": "legend"
+                    }
+            ],
+            "mark": {
+                "type": "circle"
+            },
+            "encoding": {
+                "size": {
+                    "condition": {
+                        "param": "country_select",
+                        "empty": false,
+                        "value": 100
+                    },
+                    "value": 25
+                },
+                "color": {
+                    "condition": {
+                        "param": "country_select",
+                        "empty": false,
+                        "value": "black"
+                    },
+                    "field": "COUNTRY"
+                },
+                "tooltip": [
+                    {"field": "COUNTRY"},
+                    {"field": "RANK"},
+                    {"field": "YEAR"}
+                ]
             }
         },
         {
-            "filter": "year_selection == null || datum.YEAR == year_selection"
-        }
-    ],
-    "layer": [
-        {
-            "mark": {"type": "point", "point": true},
+            "mark": {
+                "type": "line"
+            },
             "encoding": {
-                "y": {"field": "RANK", "type": "quantitative"},
-                "x": {"field": "COUNTRY", "type": "nominal"},
-                "order": {"field": "RANK", "type": "quantitative"},
-                "color": {"field":"YEAR", "type": "nominal"}
+                "color": {
+                    "condition": {
+                        "param": "country_select",
+                        "empty": false,
+                        "field": "COUNTRY"
+                    },
+                    "value": "lightgray"
+                },
+                "size": {
+                    "condition": {
+                        "param": "country_select",
+                        "empty": false,
+                        "value": 3
+                    },
+                    "value": 1
+                }
             }
         }
     ]
