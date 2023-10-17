@@ -2,6 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Passport Power Index",
   "width": "400px",
+  "height": "250px",
   "projection": {"type": "equalEarth"},
   "data": {
       "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/henleypassportindex.csv"
