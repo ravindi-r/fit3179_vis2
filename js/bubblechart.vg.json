@@ -19,12 +19,6 @@
             }
         },
         {
-            "filter": "datum['GDP (USD, BILLIONS)'] > 0"
-        },
-        {
-            "filter": "datum['ACCESS_TO_COUNTRIES'] > 0"
-        },
-        {
             "filter": "datum.YEAR == year_selection"
         }
     ],
