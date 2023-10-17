@@ -5,20 +5,36 @@
   "height": 400,
   "projection": {"type": "equalEarth"},
   "data": {
-      "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/ne_110m.json",
-      "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/henleypassportindex.csv"
   },
   "transform": [
       {
-          "lookup": "properties.NAME_LONG",
+          "lookup": "COUNTRY",
           "from": {
               "data": {
-                  "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/henleypassportindex_2022.csv"
+                  "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/ne_110m.json",
+                  "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
               },
-              "key": "COUNTRY",
-              "fields": ["RANK", "ACCESS_TO_COUNTRIES"]
+              "key": "properties.NAME_LONG",
+              "fields": ["properties","type","geometry"]
           }
+      },
+      {
+          "filter": "datum.YEAR == year_selection"
       }
+  ],
+  "params": [
+    {
+      "name": "year_selection",
+      "value": 2022,
+      "bind": {
+        "input": "range",
+        "min": 2006,
+        "max": 2022,
+        "step": 1,
+        "name": "Year: "
+      }
+    }
   ],
   "layer":[
       {
