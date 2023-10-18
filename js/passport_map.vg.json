@@ -84,7 +84,7 @@
                   {
                       "field": "ACCESS_TO_COUNTRIES",
                       "type": "quantitative",
-                      "title": "No. of Accessible Countries"
+                      "title": "No. of \n Accessible\n Countries"
                   }
               ]
           }
