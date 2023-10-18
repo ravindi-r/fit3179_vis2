@@ -38,7 +38,7 @@
       "aggregate": "count",
       "type": "quantitative"
     },
-    "row": {
+    "column": {
       "field": "properties.CONTINENT",
       "type": "nominal"
     }
