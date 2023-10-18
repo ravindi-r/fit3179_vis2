@@ -38,9 +38,10 @@
       "aggregate": "count",
       "type": "quantitative"
     },
-    "column": {
+    "facet": {
       "field": "properties.CONTINENT",
-      "type": "nominal"
+      "type": "nominal",
+      "columns": 4
     }
   }
 }
