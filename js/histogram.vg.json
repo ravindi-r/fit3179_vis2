@@ -41,7 +41,8 @@
     "facet": {
       "field": "properties.CONTINENT",
       "type": "nominal",
-      "columns": 4
+      "columns": 4,
+      "title': "Continent"
     }
   }
 }
