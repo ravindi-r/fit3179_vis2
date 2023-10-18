@@ -1,7 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Passport Power Index",
-  "width": "container",
+  "width": 800,
+  "height": 400,
   "projection": {"type": "equalEarth"},
   "data": {
       "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/henleypassportindex.csv"
@@ -67,7 +68,7 @@
                       "range": ["#ffffcc","#c2e699","#78c679","#238443"]
                   },
                   "legend": {
-                      "title": ["Number of", "Accessible", "Countries"]
+                    "title": ["Number of", "Accessible", "Countries"]
                   }
               },
               "tooltip":[
