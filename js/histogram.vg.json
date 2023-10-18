@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": "Distribution of Accessibility (as of 2022)",
-  "width": 100,
+  "width": 200,
   "height": 100,
   "data": {
     "url": "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/data/henleypassportindex.csv"
