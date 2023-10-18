@@ -1,45 +1,201 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Passport Index</title>
-    <meta charset="utf-8" />
+    <head>
 
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
-    <link rel="stylesheet" href="styles.css">
+        <title>Passport Power Index</title>
+        <meta charset="utf-8" />
 
-    <style media="screen">
-      /* Add space between Vega-Embed links  */
-      .vega-actions a {
-        margin-right: 5px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1><u>Passport Index: A Look at a Country's Freedom of Travel</u></h1>
-    <!-- Container for the visualization -->
-    
-    <div id="vis_passport_map" class="large_img"></div>
-    <p>Using the Henley Passport Index, we can take a look at the travel freedom of countries around the world. For each country it complies the number of possible destinations that it's passport holders can travel without requiring a visa.</p>
-    <br>
-    <div id="vis_hist" class="small_img"></div>
-    <p>Most countries have a low number of countries that they can access with over 50 countries being able to enter less than 60 countries.</p>
-    <div id="vis_bump" class="long_img"></div>
-    <p>Singapore and Canada appears on multiple positions of the top 10 rankings.  </p>
+        <!-- import Vega & Vega-Lite -->
+        <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+        
+        <!--- Importing pure.css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
 
-    <script>
-      // Assign the specification to a local variable vlSpec.
-      var map = "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/js/passport_map.vg.json";
-      var hist = "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/js/histogram.vg.json";
-      var bump = "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/js/bump_chart.vg.json";
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+        
+
+        <!-- CSS File -->
+        <link rel="stylesheet" href="styles.css">
+
+    </head>
+
+    <body>
+
+        <div class="page">
+
+            <!-- Visualisation Title -->
+            <div class="pure-g">
+
+                <div class="pure-u-1-1">
+
+                    <h1>How Powerful is Your Passport? </h1>
+                    <p>Using the Henley Passport Index to illustrate the travel freedom of ordinary (non-diplomatic) passports around the world.</p>
+
+                </div>
+
+            </div>
+
+            <!-- Map Idiom -->
+            <div class="pure-g">
+
+                <div class="pure-u-2-3">
+
+                    <div id="vis_map" class="vis-container"></div>
+
+                </div>
+
+                <div class="pure-u-1-3">
+
+                    <div class="description description-right">
+
+                        <h3>Travel has become more accessible over time</h3> <br>
+                        <p>In 2008, very few regions such as the United States of America, parts of Europe and Australia were able to fly freely to over 150 countries across the world. As of today, more countries
+                          have increased their travel freedom including countries in Asia and South America. </p><br>
+                        <p>Compared to the past where most countries had been limited in their passport strength, only a handful of countries are restricted to less than 50 visa-free travel locations.</p>
+                    
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr><br><br>
+
+            <!-- Histogram Idiom -->
+            <div class="pure-g">
+
+                <div class="pure-u-1-2">
+                    
+                    <p>Some continents such as Oceania do not have enough data to make observations about
+                        patterns. However there are few noteworthy points to be made;
+                    </p>
+                    <p>Taking a look at the passport index data obtained in 2022, we can note that the
+                        the <b>African continent</b> skews right, with most countries in the content being 
+                        able to access <b>less than 80 countries</b>.
+                    </p>
+                
+                </div>
+
+                <div class="pure-u-1-2">
+                    
+                    <p>In contrast, we can note that most <b>European countries</b> have
+                        very high travel freedom. As noted by the graph, other than a few countries like 
+                        <b>Belarus</b> and <b>Serbia</b>, most countries in Europe can travel to more than 150
+                        countries without a visa.
+                    </p>
+                    <p> <b>North America</b> has a relatively even distribution of travel freedom, with the largest
+                    portion being able to travel to <b>140 to 160</b> countries.</p>
+                
+                </div>
+                
+                
+                <div class="pure-u-1">
+                    <br><br>
+                    <div id="vis_hist" class="vis-container"></div>
+
+                </div>
+
+
+            </div>
+            
+            <br>
+            <hr>
+            <br><br>
+
+            <!-- Ranking Idiom-->
+
+            <div class="pure-g">
+
+                <div class="pure-u-1-3">
+                    
+                    <div class="description-left">
+
+                        <p> 
+                            The top 10 countries with the most powerful passports have changed 
+                            significantly over the years.
+                        </p><br>
+                        <p>
+                            The current highest ranked country, <b>Singapore</b> entered the top 10 in <b>2014</b>
+                            and steadily climbed up the rankings placing first in <b>3 non-consecutive years.</b>
+                        </p><br>
+                        <p>
+                            <b>The United States of America</b> that started off at the top spot in 2006 has had <b>drastic
+                            fluctuations</b>, dropping to the 10th position in 2011, rising back to number 1 in 2014,
+                            and finally altogether <b>dropping out of the top 10 rankings in 2019.</b>
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="pure-u-2-3">
+
+                    <div id="vis_bump" class="vis-container"></div>
+
+                </div>
+
+            </div>
+
+            <br>
+            <hr><br><br>
+
+            <!-- Bubblechart Idiom -->
+
+            <div class="pure-g">
+
+                <div class="pure-u-2-3">
+
+                    <div id="vis_bubble" class="vis-container"></div>
+
+                </div>
+
+                <div class="pure-u-1-3">
+
+                    <p> For some continents, the GDP of a country appear to have a relationship with the number of countries it can travel to without a visa. </p>
+                    <br><p>This holds true for <b>Asian</b> countries such as <b>United Arab Emirates</b>, and 
+                    appears to be a common trend with countries have higher GDP having greater travel freedom.  </p>
+                    <br><p>An exception to this is the <b>African continent</b>, where the number of countries allowing visa-free
+                    entry appear to fall within a similar range irrespective of a country's GDP.</p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <script>
+
+            // Save visualisation to a local variable
+            var map = "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/js/passport_map.vg.json";
+            var hist = "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/js/histogram.vg.json";
+            var bump = "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/js/bump_chart.vg.json";
+            var bubble = "https://raw.githubusercontent.com/ravindi-r/fit3179_vis2/main/js/bubblechart.vg.json";
       
 
-      // Embed the visualization in the container with id `vis`
-      vegaEmbed('#vis_hist', hist);
-      vegaEmbed('#vis_bump', bump);
-      vegaEmbed('#vis_passport_map', map);
-    </script>
-  </body>
-</html>
+            // Embed the visualisation into its respective container id
+            vegaEmbed("#vis_map", map, {"actions": false}).then(function(result) {
+                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+            vegaEmbed("#vis_hist", hist, {"actions": false}).then(function(result) {
+                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+            vegaEmbed("#vis_bump", bump, {"actions": false}).then(function(result) {
+                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
+            vegaEmbed("#vis_bubble", bubble, {"actions": false}).then(function(result) {
+                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);
 
+
+        </script>
+
+    </body>
+
+</html>
